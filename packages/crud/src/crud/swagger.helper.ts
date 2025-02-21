@@ -593,7 +593,7 @@ export class Swagger {
 
   private static getSwaggerVersion(): number {
     return swaggerPkgJson
-      ? parseInt(swaggerPkgJson.version[0], 10)
+      ? parseInt(swaggerPkgJson.version.split('.')[0], 10)
       : /* istanbul ignore next */ 3;
   }
 }
