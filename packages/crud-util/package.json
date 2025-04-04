@@ -1,7 +1,7 @@
 {
   "name": "@n4it/crud-util",
   "description": "NestJs CRUD for RESTful APIs - util",
-  "version": "1.0.9",
+  "version": "1.0.10",
   "license": "MIT",
   "main": "lib/index.js",
   "typings": "lib/index.d.ts",

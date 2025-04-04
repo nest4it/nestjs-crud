@@ -1,7 +1,7 @@
 {
   "name": "@n4it/crud",
   "description": "NestJs CRUD for RESTful APIs",
-  "version": "1.0.9",
+  "version": "1.0.10",
   "license": "GPL-3.0",
   "main": "lib/index.js",
   "typings": "lib/index.d.ts",
@@ -40,8 +40,8 @@
     "build": "npx tsc -b"
   },
   "dependencies": {
-    "@n4it/crud-request": "^1.0.9",
-    "@n4it/crud-util": "^1.0.9",
+    "@n4it/crud-request": "^1.0.10",
+    "@n4it/crud-util": "^1.0.10",
     "deepmerge": "^3.2.0"
   },
   "peerDependencies": {
