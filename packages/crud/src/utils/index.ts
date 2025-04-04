@@ -1,5 +1,5 @@
 import { Type } from '@nestjs/common';
-import { OmitType } from '@nestjs/swagger';
+import { OmitType, PartialType } from '@nestjs/swagger';
 import { randomUUID } from 'crypto';
 import type { DtoOptions } from '../interfaces';
 
@@ -58,7 +58,7 @@ export const createCrudDtoDecorators = <T>(
       defaults,
     ),
     update: createUniqueClassWithDefaults(
-      OmitType(classRef, [...keysToOmitOnCreate, ...keysToOmitOnUpdate]),
+      PartialType(OmitType(classRef, [...keysToOmitOnCreate, ...keysToOmitOnUpdate])),
       classRef.name + 'Update',
       defaults,
     ),
