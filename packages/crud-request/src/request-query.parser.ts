@@ -99,12 +99,40 @@ export class RequestQueryParser implements ParsedRequestParams {
     };
   }
 
+  normalizeIndexedParams(input: Record<string, string>) {
+    const result: Record<string, any> = {};
+
+    for (const [key, value] of Object.entries(input)) {
+      const match = key.match(/^([^\[\]]+)\[(\d+)]$/);
+      if (match) {
+        const baseKey = match[1];
+        const index = Number(match[2]);
+
+        if (!Array.isArray(result[baseKey])) {
+          result[baseKey] = [];
+        }
+        result[baseKey][index] = value;
+      } else {
+        result[key] = value;
+      }
+    }
+
+    for (const key in result) {
+      if (Array.isArray(result[key])) {
+        result[key] = result[key].filter((v) => v !== undefined);
+      }
+    }
+
+    return result;
+  }
+
   parseQuery(query: any, customOperators: CustomOperators = {}): this {
     if (isObject(query)) {
-      const paramNames = objKeys(query);
+      const normalizedQuery = this.normalizeIndexedParams(query);
+      const paramNames = objKeys(normalizedQuery);
 
       if (hasLength(paramNames)) {
-        this._query = query;
+        this._query = normalizedQuery;
         this._paramNames = paramNames;
         const searchData = this._query[this.getParamNames('search')[0]];
         this.search = this.parseSearchQueryParam(searchData) as any;
